@@ -1,0 +1,11 @@
+#matrix {
+			width: 500px;
+			border: 1 px solid blue;
+			display: flex;
+			flex-wrap: wrap;
+}
+		
+input{
+		width: 125px;
+		height: 50px;
+	}

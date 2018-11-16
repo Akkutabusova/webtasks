@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+			#cards .card{
+				border:1px solid red;
+				display:flex;
+				width:300px;
+			}
+			#cards .card .title{
+				flex-grow: 1;
+			}
+			#cards .card .price{
+				font-weight: bold;
+				padding-right: 20px;
+			}
+			#loading{
+				display: none;
+			}
+			#cards{
+				width:300px;
+				height:200px;
+				border: 1px solid blue;
+			}
+		</style>
+	</head>
+	<body>
+		<button value='http://demo4296963.mockable.io/listCars' onClick='onClick(value)'>Load</button>
+		<div id="cards">
+			<img width="300px" height="200px" id="loading" src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif"/>
+		</div>
+		<script defer>
+			const JSON_PATH = 'http://demo4296963.mockable.io/listCars';
+			var can=0;
+			function onClick(value){
+				if(can==0){
+					document.getElementById('loading').style.display = 'block';
+					const button=document.querySelector('button');
+					button.innerHTML='loading...';
+					setTimeout(function(){
+						document.getElementById('loading').style.display = 'none';
+					button.innerHTML='Items are loaded';
+						fetch(JSON_PATH).then(onResponse,onError).then(onS);
+						}, 2000);}
+				can=1;
+			}
+			function onS(text){
+				const cards = document.getElementById('cards');
+				const b = JSON.parse(text);
+				for(let r of b){
+					//console.log(r);
+					var main=document.createElement('div');
+					var div=document.createElement('div');
+					var div2=document.createElement('div');
+					main.classList.add('card');
+					div.classList.add('title');
+					div2.classList.add('price');
+					div.innerHTML=r.maker + ' '+ r.model;
+					div2.innerHTML=r.price;
+					main.appendChild(div);
+					main.appendChild(div2);
+					cards.appendChild(main);
+				}
+			}
+			function onResponse(response){
+				return response.text();
+			}
+			function onError(error){
+				console.log('Error: ' + error);
+			}
+		</script>
+	</body>
+</html>

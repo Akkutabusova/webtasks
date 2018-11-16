@@ -1,0 +1,65 @@
+<html>
+
+<head>
+
+<style>
+
+#news{
+
+	border:1px solid red;
+
+	width:400px;
+
+	height:300px;
+
+}
+
+</style>
+
+</head>
+
+<body>
+
+
+
+<div id="news"></div>
+
+<button id="sport">Load Sport news</button>
+
+<button id="politics">Load Politics news</button>
+
+<button id="bussiness">Load Bussiness news</button>
+
+
+
+
+
+<script>
+	let button1 = document.getElementById("sport");
+	button1.addEventListener("click", function(e){
+		let url = "http://demo4296963.mockable.io/news-bussiness";
+		fetch(url).then((response) => response.text()).then((data) => {
+			document.getElementById("news").innerHTML = data;
+		});
+	});
+	
+	document.getElementById("politics").addEventListener('click', function(e){
+		let url = "http://demo4296963.mockable.io/news-politics";
+		fetch(url).then((response) => response.text()).then((data) => {
+			document.getElementById("news").innerHTML = data;
+		});
+	});
+	
+	document.getElementById("bussiness").addEventListener('click', function(e){
+		let url = "http://demo4296963.mockable.io/news-sport";
+		fetch(url).then((response) => response.text()).then((data) => {
+			document.getElementById("news").innerHTML = data;
+		});
+	});
+	
+
+</script>
+
+</body>
+
+</html>
